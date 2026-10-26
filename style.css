@@ -1,0 +1,327 @@
+/* ===== Ерөнхий загвар (MOBILE-FIRST: үндсэн стиль = гар утас) ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    overflow-x: hidden; /* хэвтээ скролл гарахаас сэргийлнэ */
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-wrap: break-word;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* 1. Header */
+header {
+    background-color: #8b0000;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1rem;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+header p { font-size: 0.95rem; }
+
+/* 2. Navigation: гар утсанд босоо + hamburger */
+nav {
+    background-color: #222;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    color: #ffd700;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* Hamburger товч */
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 44px;   /* хуруугаар дарахад тохиромжтой хэмжээ */
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: #ffd700;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Товч идэвхтэй үед "X" хэлбэр */
+.menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+nav ul {
+    list-style: none;
+    display: none;          /* гар утсанд анхнаасаа нуугдсан */
+    flex-direction: column;
+    margin-top: 0.5rem;
+}
+
+nav ul.open { display: flex; }
+
+nav ul li a {
+    display: block;
+    padding: 0.85rem 0.5rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1.05rem;
+    border-top: 1px solid #444;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover { color: #ffd700; }
+
+/* Үндсэн бүтэц: гар утсанд 1 багана */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 1.25rem auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* 3. Main: картууд 1 багана */
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-content: start;
+}
+
+.food-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.food-card:hover { transform: translateY(-5px); }
+
+.food-image {
+    width: 100%;
+    height: 160px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    font-weight: bold;
+}
+
+.food-info { padding: 1.25rem; }
+
+.food-info h3 {
+    margin-bottom: 0.5rem;
+    color: #8b0000;
+}
+
+.food-info p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #666;
+}
+
+/* 4. Sidebar: гар утсанд картуудын доор */
+aside {
+    background-color: white;
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+aside h2 {
+    color: #222;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #8b0000;
+    padding-bottom: 0.5rem;
+}
+
+aside ul { list-style: none; }
+
+aside ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* 5. Footer */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 1.25rem 1rem;
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+/* ===== TABLET: 768px ба түүнээс дээш ===== */
+@media (min-width: 768px) {
+    header { padding: 2rem 1rem; }
+    header h1 { font-size: 2rem; }
+
+    /* Цэс нэг мөрөнд, hamburger алга */
+    nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+    }
+    .menu-toggle { display: none; }
+    nav ul {
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+        gap: 20px;
+    }
+    nav ul li a {
+        border-top: none;
+        padding: 0.4rem 0;
+    }
+
+    .container { padding: 0 1.5rem; }
+
+    /* Картууд 2 багана */
+    main { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .food-image { height: 180px; }
+
+    /* Sidebar-ын хоёр хэсэг зэрэгцэнэ */
+    aside { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+}
+
+/* ===== DESKTOP: 1024px ба түүнээс дээш ===== */
+@media (min-width: 1024px) {
+    header h1 { font-size: 2.5rem; }
+
+    .container {
+        margin: 2rem auto;
+        grid-template-columns: 3fr 1fr;   /* контент + sidebar */
+        gap: 30px;
+    }
+
+    /* Картууд 2 багана үргэлжилнэ, зураг том болно */
+    .food-image { height: 200px; }
+
+    /* Sidebar буцаад босоо */
+    aside { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+/* Том дэлгэц: 1440px+ → картууд 3 багана */
+@media (min-width: 1440px) {
+    .container { max-width: 1400px; }
+    main { grid-template-columns: repeat(3, 1fr); }
+}
+
+
+/* ===== Харагдац сонгогч (доод хэсэг) ===== */
+footer { padding-bottom: 4.5rem; }   /* тогтмол самбар footer-ийг таглахгүй */
+
+.view-switcher {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    z-index: 1000;
+    background: #111;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+}
+
+.vs-label { display: none; font-size: 0.9rem; margin-right: 6px; }
+
+.view-switcher button {
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 6px;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    min-height: 40px;
+}
+
+.view-switcher button:hover { border-color: #ffd700; }
+
+.view-switcher button.active {
+    background: #ffd700;
+    color: #222;
+    border-color: #ffd700;
+    font-weight: bold;
+}
+
+.preview-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 56px;
+    z-index: 999;
+    background: #555;
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+}
+
+.preview-overlay[hidden] { display: none; }
+
+.preview-overlay iframe {
+    height: 100%;
+    max-width: 100%;
+    border: 0;
+    background: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* iframe дотор сонгогчийг харуулахгүй */
+body.in-frame .view-switcher { display: none; }
+body.in-frame footer { padding-bottom: 1.25rem; }
+
+@media (min-width: 768px) {
+    .vs-label { display: inline; }
+    .view-switcher button { padding: 0.5rem 1rem; font-size: 0.95rem; }
+}

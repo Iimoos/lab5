@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Монгол Хоолны Вэб Сайт</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Хэсэг -->
+    <header>
+        <h1>Монгол Үндэсний Хоолны Цэс</h1>
+        <p>Уламжлалт амт чанар, соёл уламжлал</p>
+    </header>
+
+    <!-- Navigation: гар утсанд hamburger цэс болж өөрчлөгдөнө -->
+    <nav>
+        <div class="nav-top">
+            <div class="logo">NomadKitchen</div>
+            <button class="menu-toggle" id="menuToggle"
+                    aria-label="Цэс нээх" aria-expanded="false" aria-controls="navMenu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <ul id="navMenu">
+            <li><a href="#">Нүүр хуудас</a></li>
+            <li><a href="#">Хоолны цэс</a></li>
+            <li><a href="#">Бидний тухай</a></li>
+            <li><a href="#">Холбоо барих</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <main>
+            <div class="food-card">
+                <div class="food-image">Хуушуур</div>
+                <div class="food-info">
+                    <h3>Монгол Хуушуур</h3>
+                    <p>Гар аргаар татсан үхэр, хонины махтай, шаржигнуур амттай уламжлалт хуушуур.</p>
+                </div>
+            </div>
+
+            <div class="food-card">
+                <div class="food-image">Бууз</div>
+                <div class="food-info">
+                    <h3>Уурын Бууз</h3>
+                    <p>Баяр ёслолын ширээний гол чимэг, шүүслэг, амтлаг үндэсний уурын бууз.</p>
+                </div>
+            </div>
+
+            <div class="food-card">
+                <div class="food-image">Цуйван</div>
+                <div class="food-info">
+                    <h3>Гар Цуйван</h3>
+                    <p>Гар аргаар элдсэн гурил, шинэхэн мах, ногоотой хослуулан хуурсан цуйван.</p>
+                </div>
+            </div>
+
+            <div class="food-card">
+                <div class="food-image">Шөл</div>
+                <div class="food-info">
+                    <h3>Банштай Цай</h3>
+                    <p>Сүүтэй цайнд чанасан банш, шар тос, борцоор амталсан алжаал тайлах шөл.</p>
+                </div>
+            </div>
+        </main>
+
+        <aside>
+            <section>
+                <h2>Цагийн хуваарь</h2>
+                <ul>
+                    <li>Даваа - Баасан: 09:00 - 22:00</li>
+                    <li>Бямба - Ням: 10:00 - 23:00</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Онцлох ундаа</h2>
+                <ul>
+                    <li>Үндэсний айраг</li>
+                    <li>Хярам</li>
+                    <li>Борцтой цай</li>
+                </ul>
+            </section>
+        </aside>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Монгол Хоолны Вэб Сайт. Бүх эрх хуулиар хамгаалагдсан.</p>
+    </footer>
+
+    <!-- Харагдац сонгогч: доод хэсэгт тогтмол байрлана -->
+    <div class="view-switcher" id="viewSwitcher">
+        <span class="vs-label">Харагдац:</span>
+        <button data-view="auto" class="active">Автомат</button>
+        <button data-view="375">Гар утас</button>
+        <button data-view="768">Таблет</button>
+    </div>
+    <div class="preview-overlay" id="previewOverlay" hidden>
+        <iframe id="previewFrame" title="Харагдац урьдчилан харах"></iframe>
+    </div>
+
+    <script>
+        // Hamburger цэс нээх/хаах
+        const toggle = document.getElementById('menuToggle');
+        const menu = document.getElementById('navMenu');
+        toggle.addEventListener('click', () => {
+            const open = menu.classList.toggle('open');
+            toggle.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open);
+        });
+
+        // iframe дотор ачаалсан үед сонгогчийг нуух
+        if (window.self !== window.top) {
+            document.body.classList.add('in-frame');
+        }
+
+        // Харагдац сонгох (Автомат / Гар утас / Таблет / Лаптоп)
+        const vsButtons = document.querySelectorAll('#viewSwitcher button');
+        const overlay = document.getElementById('previewOverlay');
+        const frame = document.getElementById('previewFrame');
+
+        vsButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                vsButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const view = btn.dataset.view;
+
+                if (view === 'auto') {
+                    overlay.hidden = true;
+                    frame.removeAttribute('src');
+                    return;
+                }
+                frame.style.width = view + 'px';
+                if (!frame.getAttribute('src')) {
+                    frame.src = location.href.split('#')[0];
+                }
+                overlay.hidden = false;
+            });
+        });
+    </script>
+</body>
+</html>
